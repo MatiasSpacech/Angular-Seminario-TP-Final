@@ -1,0 +1,24 @@
+<h3>Productos</h3>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (producto of productos; track producto.nombre) {
+        <tr>
+            <th>{{producto.nombre}}</th>
+            <th>{{producto.precio}}</th>
+            <th>{{producto.descripcion}}</th>
+            <th>{{producto.cantidad}}</th>
+            <th><img [src]="producto.imagen" [alt]="producto.nombre"></th>
+        </tr>
+    }
+    </tbody>
+</table>
