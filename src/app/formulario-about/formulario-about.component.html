@@ -1,0 +1,42 @@
+ <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <h2 class="text-dark mb-4">Contacto</h2>
+        <form [formGroup]="formularioContacto" (submit)="onSubmit()" >
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control bg-secondary text-white border-0" id="nombre"
+                formControlName="nombre" placeholder="Tu nombre completo">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control bg-secondary text-white border-0" id="email" 
+                formControlName="email" placeholder="nombre@ejemplo.com" >
+                <div>
+                  @if (formularioContacto.get('email')?.hasError('required')) {
+                    <p class="text-danger">El email es requerido</p>
+                  }
+                  @if (formularioContacto.get('email')?.hasError('email')) {
+                    <p class="text-danger">El formato no es válido</p>
+                  }
+                </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control bg-secondary text-white border-0" id="telefono" 
+                formControlName="telefono" placeholder="(011) 1234-5678">
+          </div>
+
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control bg-secondary text-white border-0" id="mensaje" 
+            formControlName="mensaje" rows="4" placeholder="Escribí tu consulta aquí..." required></textarea>
+          </div>
+
+          <button type="submit" [disabled]="formularioContacto.invalid" class="btn btn-dark w-100">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>

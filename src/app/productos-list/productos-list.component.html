@@ -12,11 +12,15 @@
     </thead>
     <tbody>
         @for (producto of productos; track producto.nombre) {
-        <tr>
+        <tr [ngClass]="{'oferton': producto.oferta}">
             <th>{{producto.nombre}}</th>
-            <th>{{producto.precio}}</th>
+            <th>{{producto.precio | currency}}</th> <!-- uso un pipes para mostrar $ -->
             <th>{{producto.descripcion}}</th>
-            <th>{{producto.cantidad}}</th>
+            @if (producto.cantidad > 0) {                
+                <th>{{producto.cantidad}}</th>
+            }@else {
+                <th>Agotado</th>
+            }
             <th><img [src]="producto.imagen" [alt]="producto.nombre"></th>
         </tr>
     }
