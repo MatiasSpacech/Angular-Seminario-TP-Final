@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,11 +29,12 @@ import { FormularioAboutComponent } from './formulario-about/formulario-about.co
     AppRoutingModule,   
     FormsModule,
     ReactiveFormsModule,
-   // BrowserAnimationsModule    
+    
   ],
   providers: [
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
+    
     ProductoDataServiceService
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Mensaje } from './Mensaje';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class FormularioAboutComponent implements OnInit {
   });
   constructor(private http: HttpClient) { }
   apiContactoUrl = 'https://6663485c62966e20ef0c2c18.mockapi.io/veterinaria/mensajes';
-  mensajes: any[] = [];
+  mensajes: Mensaje[] = [];
 
   ngOnInit(): void {
     this.obtenerMensajes();
