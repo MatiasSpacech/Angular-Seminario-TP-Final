@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from './Producto';
 import { ProductoDataServiceService } from '../producto-data-service.service';
+import { ProductoCarritoService } from '../producto-carrito.service';
 
 @Component({
   selector: 'app-productos-list',
@@ -10,12 +11,46 @@ import { ProductoDataServiceService } from '../producto-data-service.service';
 })
 export class ProductosListComponent implements OnInit {
   productos: Producto[] = [];
-  constructor(private productoDataService: ProductoDataServiceService) { }
+  constructor(private productoDataService: ProductoDataServiceService,
+              private productosCarritoService: ProductoCarritoService) { }
 
   ngOnInit(): void {
     this.productoDataService.getProductos().subscribe((data: Producto[]) => {
       this.productos = data;
-    });
+    })   
+  }
+  
+  addCart(producto: Producto) {
+    this.productosCarritoService.addToCart(producto);
+    producto.cantidad -= producto.quantity;
+    producto.quantity = 0; 
+     
+  }
+
+  upQuantity(producto : Producto): void{
+    if(producto.quantity < producto.cantidad && producto.cantidad != 0) {
+      producto.quantity ++;
+     
+    }
+  }
+
+  downQuantity(producto : Producto): void{    
+    if(producto.quantity > 0) {
+      producto.quantity --;
+     
+    }
+  }
+
+  verifyProductoQuantity(producto : Producto): void {
+    if(producto.cantidad < producto.quantity) {
+      alert("No quedan mas en stock");
+      producto.quantity = producto.cantidad;
+    }
+
+    if(producto.quantity < 0) {
+      alert("No se pueden pedir menos que 0 productos");
+      producto.quantity = 0;
+    }
   }
   /*productos : Producto[]= [{
     "nombre": "Collar",

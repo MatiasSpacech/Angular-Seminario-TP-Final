@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';  
+import { Observable, tap } from 'rxjs';  
 import { Producto } from './productos-list/Producto';
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,10 @@ export class ProductoDataServiceService {
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.apiUrl); 
+    return this.http.get<Producto[]>(this.apiUrl).pipe(tap((productos: Producto[]) =>  {
+      productos.forEach(producto => {
+        producto.quantity = 0; 
+      });
+    }));
   }
-
-
-
 }

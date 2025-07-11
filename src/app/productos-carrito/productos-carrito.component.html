@@ -1,1 +1,24 @@
-<h3>Carrito de compras</h3>
+<h3>Carrito de Compras</h3>
+<table class="table table-primary table-striped">
+  <thead>
+    <tr>
+      <th>Cerveza</th>
+      <th>Cantidad</th>
+      <th>Precio Unitario</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (producto of productos; track producto.nombre) {
+    <tr>
+      <td>{{producto.nombre}}</td>
+      <td>{{producto.quantity}}</td>
+      <td>{{producto .precio | currency:'ARS'}}</td>
+    </tr>
+    }
+  </tbody>
+</table>    
+
+<p class="text-end">Total {{total() | currency:'ARS'}}</p>
+<div class="text-end">
+    <button (click)="compra()">Comprar</button>
+</div>

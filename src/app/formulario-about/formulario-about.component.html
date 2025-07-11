@@ -22,13 +22,11 @@
                   }
                 </div>
           </div>
-
           <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" class="form-control bg-secondary text-white border-0" id="telefono" 
+            <input type="number" class="form-control bg-secondary text-white border-0" id="telefono" 
                 formControlName="telefono" placeholder="(011) 1234-5678">
           </div>
-
           <div class="mb-3">
             <label for="mensaje" class="form-label">Mensaje</label>
             <textarea class="form-control bg-secondary text-white border-0" id="mensaje" 
@@ -40,3 +38,24 @@
       </div>
     </div>
   </div>
+  <h2 class="text-center">Mensajes recibidos:</h2>
+@for (mensaje of mensajes.slice().reverse(); track $index) {
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card bg-secondary text-white mb-3">
+          <div class="card-header">
+            Mensaje #{{mensaje.id }}
+            <button type="button" class="btn btn-danger btn-sm float-end" (click)="deleteMensaje(mensaje.id)">
+              Eliminar
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ mensaje.nombre }}</h5>
+            <p class="card-text">{{ mensaje.mensaje }}</p>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} 

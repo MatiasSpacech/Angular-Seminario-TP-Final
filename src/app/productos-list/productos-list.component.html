@@ -8,13 +8,14 @@
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Imagen</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @for (producto of productos; track producto.nombre) {
         <tr [ngClass]="{'oferton': producto.oferta}">
             <th>{{producto.nombre}}</th>
-            <th>{{producto.precio | currency}}</th> <!-- uso un pipes para mostrar $ -->
+            <th>{{producto.precio | currency}}</th> 
             <th>{{producto.descripcion}}</th>
             @if (producto.cantidad > 0) {                
                 <th>{{producto.cantidad}}</th>
@@ -22,6 +23,20 @@
                 <th>Agotado</th>
             }
             <th><img [src]="producto.imagen" [alt]="producto.nombre"></th>
+            <th>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default " (click)="downQuantity(producto)">
+                        -
+                    </button>
+                    <input class="smallInput" type="text" [(ngModel)]="producto.quantity" (focusout)="verifyProductoQuantity(producto)"/>
+                    <button type="button" class="btn btn-default btn-xs" (click)="upQuantity(producto)">
+                        +
+                    </button>
+                </div>      
+                <button type="button" class="btn btn-default" [disabled]="producto.quantity <= 0" (click)="addCart(producto)">
+                Comprar
+                </button>
+            </th>
         </tr>
     }
     </tbody>
